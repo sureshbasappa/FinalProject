@@ -1,0 +1,58 @@
+<div class="row" >
+    <div class="col-4">
+        <div class="card">
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" 
+            class="card-img-top img-thumbnail">
+            <div class="card-body">
+                <div class="md-2" *ngIf="(presence.onlineUsers$ |async).includes(member.username)">
+                    <i class="fa fa-user-circle text-success"></i>online Now
+                </div>
+
+                <div>
+                    <strong>Location:</strong>
+                    <p>{{member.city}}, {{member.country}}</p>
+                </div>
+                <div>
+                    <strong>Age:</strong>
+                    <p>{{member.age}}</p>
+                </div>
+                <div>
+                    <strong>Last Active</strong>
+                    <p>{{member.lastActive| timeago}}</p>
+                </div>
+                <div>
+                    <strong>Member Sience:</strong>
+                    <p>{{member.created|date:'dd MMM yyyy'}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button class="btn btn-primary">Like</button>  
+                    <button (click)="selectTab(3)" class="btn btn-success">Message</button>                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <tabset class="member-tabset" #memberTabs>
+            <tab heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)">
+                
+                <h1>Description</h1>
+                <p>{{member.interduction}}</p>
+                <h4>Looking for</h4>
+                <p>{{member.lookingFor}}</p>
+            </tab>
+            <tab heading='Intrests' (selectTab)="onTabActivated($event)">
+                <h1>Intrests</h1>
+                <p>{{member.intests}}</p>
+            </tab>
+            <tab heading='Photos' (selectTab)="onTabActivated($event)">
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
+                style="display: inline-block; margin-bottom: 20px;"></ngx-gallery>
+            </tab>
+            <tab heading='Message' (selectTab)="onTabActivated($event)">
+                <app-member-messages [username]="member.username"></app-member-messages>
+            </tab>
+        </tabset>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.dropdown-toggle, .dropdown-item{
+cursor:pointer;
+
+}
+
+.dropdown-menu{
+    background-color: #f9f9f9;
+}
+
+.dropdown-item a:hover {
+    background-color: #ddd;
+}
+
+img{
+    max-height: 50px;
+    border: 2px solid #fff;
+    display: inline;
+}
